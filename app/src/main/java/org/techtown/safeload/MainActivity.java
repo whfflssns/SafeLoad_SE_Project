@@ -2,11 +2,13 @@ package org.techtown.safeload;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity
     SupportMapFragment mapFragment;
     private GoogleMap mMap;
     LinearLayout container;
+    ConstraintLayout option;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         container = findViewById(R.id.road_Layout);
+        option = findViewById(R.id.Option);
 
         AutoPermissions.Companion.loadAllPermissions(this, 101);
 
@@ -52,6 +56,13 @@ public class MainActivity extends AppCompatActivity
           public void onClick(View v) {
                LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                inflater.inflate(R.layout.searching_road, container, true);
+           }
+       });
+       option.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent intent = new Intent(getApplicationContext(), ReportActivity.class);
+               startActivity(intent);
            }
        });
 
